@@ -9,7 +9,7 @@ on:
     types: [opened, synchronize]
 
 jobs:
-  simple_deployment_pipeline:
+  build_and_test:
     runs-on: ubuntu-20.04
     steps:
         - uses: actions/checkout@v3
@@ -30,6 +30,22 @@ jobs:
             command: npm run test:e2e
             start: npm run start-prod
             wait-on: http://localhost:8080
+
+  deploy:
+    runs-on: ubuntu-20.04
+    needs: build_and_test
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
+    steps:
+        - uses: actions/checkout@v3
+        - uses: actions/setup-node@v3
+          with:
+            node-version: '16'
+        - name: Install dependencies
+          run: npm install
+        - name: Lint
+          run: npm run eslint
+        - name: Build
+          run: npm run build
         - name: Deploy app
           uses: superfly/flyctl-actions/setup-flyctl@master
         - run: flyctl deploy --remote-only
