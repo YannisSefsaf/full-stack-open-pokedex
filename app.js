@@ -10,9 +10,10 @@ app.use(express.static("dist"));
 
 // Health check endpoint
 app.get("/health", (req, res) => {
-  res.status(500).send("error");
+  throw "error...";
+  // eslint-disable-next-line no-unreachable
+  res.send("ok");
 });
-
 // Version endpoint
 app.get("/version", (req, res) => {
   res.send("1"); // Increment this number with each new deployment
