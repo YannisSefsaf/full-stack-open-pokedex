@@ -1,13 +1,10 @@
-# fly.toml app configuration file generated for yannis-sefsaf-full-stack-open-pokedex on 2024-01-02T20:10:30-06:00
-#
-# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
-#
-
 app = "yannis-sefsaf-full-stack-open-pokedex"
 primary_region = "gdl"
 
 [build]
-
+  [build.args]
+    NODE_VERSION = "16.19.1"
+    
 [deploy]
   release_command = "npm run build"
 
@@ -20,12 +17,10 @@ primary_region = "gdl"
   auto_stop_machines = true
   auto_start_machines = true
   min_machines_running = 0
-  processes = ["app"]
 
 [[services]]
   protocol = "tcp"
   internal_port = 8080
-  processes = ["app"]
 
   [[services.ports]]
     port = 80
