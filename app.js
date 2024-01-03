@@ -10,9 +10,7 @@ app.use(express.static("dist"));
 
 // Health check endpoint
 app.get("/health", (req, res) => {
-  throw "error...";
-  // eslint-disable-next-line no-unreachable
-  res.send("ok");
+  res.status(500).send("error");
 });
 // Version endpoint
 app.get("/version", (req, res) => {
