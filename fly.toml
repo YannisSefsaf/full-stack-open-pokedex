@@ -25,6 +25,7 @@ primary_region = "gdl"
 [[services]]
   protocol = "tcp"
   internal_port = 8080
+  processes=["app"]
 
   [[services.ports]]
     port = 80
