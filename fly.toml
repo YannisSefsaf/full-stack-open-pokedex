@@ -1,8 +1,3 @@
-# fly.toml app configuration file generated for yannis-sefsaf-full-stack-open-pokedex on 2023-12-30T23:15:20-06:00
-#
-# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
-#
-
 app = "yannis-sefsaf-full-stack-open-pokedex"
 primary_region = "gdl"
 
@@ -17,10 +12,10 @@ primary_region = "gdl"
     NODE_VERSION = "16.19.1"
 
 [env]
-  PORT = "8080" # add this
+  PORT = "8080"
 
 [http_service]
-  internal_port = 8080 # ensure that this is same as PORT
+  internal_port = 8080
   force_https = true
   auto_stop_machines = true
   auto_start_machines = true
@@ -31,3 +26,17 @@ primary_region = "gdl"
   cpu_kind = "shared"
   cpus = 1
   memory_mb = 1024
+
+[[services.tcp_checks]]
+  grace_period = "1s"
+  interval = "15s"
+  restart_limit = 0
+  timeout = "2s"
+
+[[services.http_checks]]
+  interval = 10000
+  method = "get"
+  path = "/health"
+  protocol = "http"
+  timeout = 2000
+  grace_period = "1s"
