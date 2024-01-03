@@ -16,3 +16,4 @@ Start by running `npm install` inside the project folder
 
 # Change
 
+Changed fly.io config
