@@ -101,7 +101,8 @@ jobs:
         # Discord notification on build failure
         - name: Discord notification on failure
           uses: Ilshidur/action-discord@0c4b27844ba47cb1c7bee539c8eead5284ce9fa9
-          with:
-            args: 'Build failed! Commit SHA: {{ github.sha }}. Please check the build logs.'
           env:
             DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+            COMMIT_SHA: ${{ github.sha }}
+          with:
+            args: 'Build failed! Commit SHA: {{ COMMIT_SHA }}. Please check the build logs.'
