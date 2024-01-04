@@ -30,6 +30,8 @@ jobs:
             command: npm run test:e2e
             start: npm run start-prod
             wait-on: http://localhost:8080
+        - name: Intentional Error
+          run: exit 1
 
   deploy:
     runs-on: ubuntu-20.04
