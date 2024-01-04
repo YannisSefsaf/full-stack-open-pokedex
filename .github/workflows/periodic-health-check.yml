@@ -1,0 +1,21 @@
+name: Periodic Health Check
+
+on:
+  schedule:
+    # Runs every 6 hours; adjust the frequency as needed
+    - cron: '0 */6 * * *'
+  # Optional: Uncomment to enable manual trigger for testing
+  # workflow_dispatch:
+
+jobs:
+  health-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check Application Health
+        uses: jtalk/url-health-check-action@v3
+        with:
+          url: 'https://yannis-sefsaf-full-stack-open-pokedex.fly.dev/health'
+          follow-redirect: true
+          max-attempts: 3
+          retry-delay: '5s'
+          # Add other configurations as needed
