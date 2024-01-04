@@ -92,7 +92,7 @@ jobs:
 
   notify_failure:
     runs-on: ubuntu-20.04
-    needs: build_and_test
+    needs: [build_and_test, deploy, tag_release]
     if: failure()
     steps:
         - uses: actions/checkout@v4
